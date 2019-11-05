@@ -63,7 +63,6 @@ from maven command or from jenkins project.
 3.  Create a new Servlet named 'HomeServlet' with URL pattern "/test"
 
     ```java
-    @WebServlet("/test")
     public class HomeServlet extends HttpServlet {
         private static final long serialVersionUID = 1L;
         
