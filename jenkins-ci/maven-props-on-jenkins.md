@@ -61,3 +61,7 @@
 		    Credentials:	[username: manager, password: pass1234]
 		
         URl:  http://localhost:8082/manager	
+
+3.  Once done, use "Build Now" to trigger a new build.
+
+4.  When build succeeds, just visit: http://localhost:8082/app1-1.0/test
