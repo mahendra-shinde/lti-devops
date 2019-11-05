@@ -1,13 +1,29 @@
 package com.lti.servlets;
 
 import java.sql.*;
+import java.util.Properties;
 
 public class DBUtil {
-	private static final String url = "jdbc:oracle:thin:@192.168.100.86:1521/xe";
-	private static final String user = "hr";
-	private static final String pass="hr";
+	//Collection of properties
 	
-	private DBUtil() { }
+	private static  String url ;
+	private static  String user; 
+	private static  String pass;
+	
+	// Try to get value from db.properties if not found then use default values
+	/// dbProps.getProperty("key","defaultValue");
+	//  returns "defaultValue" when "key" is NULL
+	static { 
+		Properties dbProps = new Properties();
+		try {
+		dbProps.load(DBUtil.class.getResourceAsStream("/db.properties"));
+		url = dbProps.getProperty("url");
+		user = dbProps.getProperty("username");
+		pass = dbProps.getProperty("password");
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 	
 	public static Connection getConnection() 
 		throws SQLException, ClassNotFoundException

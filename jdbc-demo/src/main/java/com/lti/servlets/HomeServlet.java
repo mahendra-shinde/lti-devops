@@ -5,29 +5,22 @@ import java.io.PrintWriter;
 import java.sql.*;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class HomeServlet
- */
+@WebServlet("/test")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public HomeServlet() {
         super();
-        // TODO Auto-generated constructor stub
+
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 		
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/plain");
@@ -41,6 +34,11 @@ public class HomeServlet extends HttpServlet {
 			out.println(i+" "+rs.getString("TNAME"));
 			i++;
 		}
+		//Try inserting a new records
+		PreparedStatement ps = con.prepareStatement("INSERT into REGIONS values(?,?)");
+		ps.setInt(1,5);
+		ps.setString(2, "Antarctica");
+		ps.executeUpdate();
 		DBUtil.close(con);
 		
 		}catch(SQLException | ClassNotFoundException ex) {
@@ -51,13 +49,5 @@ public class HomeServlet extends HttpServlet {
 		
 	}
 	
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }
